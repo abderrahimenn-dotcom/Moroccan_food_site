@@ -2,96 +2,119 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>منيو الأكل المغربي</title>
+  <title>طلب الأكل المغربي</title>
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
-    body { background:#f8f9fa; font-family: Arial, sans-serif; }
-    .item-card { background:#fff;border-radius:10px;padding:15px;margin-bottom:15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
-    .btn { width: 100%; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      font-size: 16px;
+    }
+    button {
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
   </style>
 </head>
 
-<body class="container py-4">
+<body>
 
-<h3 class="text-center mb-4">🍽️ منيو الأكل المغربي</h3>
+<h2 style="text-align:center;">🍽️ طلب الأكل المغربي</h2>
 
-<!-- ====== المنتجات ====== -->
-<div class="item-card">
-  <strong>🍪 غريبة</strong> (10 روبل / 100غ)
-  <input type="number" class="form-control mt-2" placeholder="الكمية بالغرام" data-price="0.1">
+<!-- المنتجات -->
+<div class="card">
+  <label>🍪 غريبة (10 روبل / 100غ)</label>
+  <input type="number" id="ghriba" placeholder="الكمية بالغرام">
 </div>
 
-<div class="item-card">
-  <strong>🍰 كعب غزال</strong> (15 روبل / 100غ)
-  <input type="number" class="form-control mt-2" placeholder="الكمية بالغرام" data-price="0.15">
+<div class="card">
+  <label>🥐 كعب غزال (15 روبل / 100غ)</label>
+  <input type="number" id="kaab" placeholder="الكمية بالغرام">
 </div>
 
-<div class="item-card">
-  <strong>🥮 شباكية</strong> (12 روبل / 100غ)
-  <input type="number" class="form-control mt-2" placeholder="الكمية بالغرام" data-price="0.12">
+<div class="card">
+  <label>🍯 شباكية (12 روبل / 100غ)</label>
+  <input type="number" id="chebakia" placeholder="الكمية بالغرام">
 </div>
 
-<div class="item-card">
-  <strong>🍯 مقروط</strong> (8 روبل / 100غ)
-  <input type="number" class="form-control mt-2" placeholder="الكمية بالغرام" data-price="0.08">
+<!-- معلومات الزبون -->
+<div class="card">
+  <h4>📋 معلومات الزبون</h4>
+  <input type="text" id="name" placeholder="الاسم">
+  <input type="text" id="phone" placeholder="رقم الهاتف">
+  <input type="date" id="date">
 </div>
 
-<hr>
+<button onclick="sendOrder()">✅ تأكيد وإرسال الطلب</button>
 
-<!-- ====== معلومات الزبون ====== -->
-<h5>📋 معلومات الزبون</h5>
-<input id="name" class="form-control mb-2" placeholder="الاسم">
-<input id="phone" class="form-control mb-2" placeholder="رقم الهاتف">
-<input id="date" type="date" class="form-control mb-2" placeholder="تاريخ التوصيل">
-
-<!-- ====== الأزرار ====== -->
-<button id="calculateBtn" class="btn btn-primary mt-3">احسب الثمن الإجمالي</button>
-<p id="total" class="mt-2 fw-bold"></p>
-
-<a id="orderButton" href="#" target="_blank">
-  <button class="btn btn-success mt-2">اطلب الآن</button>
-</a>
-
-<!-- ====== الجافاسكريبت ====== -->
 <script>
-document.getElementById("calculateBtn").addEventListener("click", function() {
-  let items = document.querySelectorAll(".item-card input");
-  let total = 0;
-  let orderDetails = "";
+function sendOrder() {
 
-  items.forEach(function(input, idx){
-    let qty = parseFloat(input.value) || 0;
-    let price = parseFloat(input.dataset.price) || 0;
-    if(qty > 0){
-      total += qty * price;
-      let name = input.previousElementSibling.innerText;
-      orderDetails += name + ": " + qty + "غ\n";
-    }
+  const TOKEN = "8508927567:AAFOIMMzc87qvYBspzZLO2F4JLaHBiZ6hJo";
+  const CHAT_ID = "7969758653";
+
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let date = document.getElementById("date").value;
+
+  let ghriba = document.getElementById("ghriba").value || 0;
+  let kaab = document.getElementById("kaab").value || 0;
+  let chebakia = document.getElementById("chebakia").value || 0;
+
+  let total =
+    (ghriba * 0.10) +
+    (kaab * 0.15) +
+    (chebakia * 0.12);
+
+  let message =
+`📦 طلب جديد من الموقع
+
+👤 الاسم: ${name}
+📞 الهاتف: ${phone}
+📅 تاريخ التوصل: ${date}
+
+🍪 غريبة: ${ghriba} غ
+🥐 كعب غزال: ${kaab} غ
+🍯 شباكية: ${chebakia} غ
+
+💰 الثمن الإجمالي: ${total.toFixed(2)} روبل
+`;
+
+  fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message
+    })
+  })
+  .then(() => {
+    alert("✅ تم إرسال الطلب بنجاح");
+  })
+  .catch(() => {
+    alert("❌ وقع خطأ، حاول مرة أخرى");
   });
-
-  document.getElementById("total").innerText = "الثمن الإجمالي: " + total.toFixed(2) + " روبل";
-
-  // معلومات الزبون
-  let name = document.getElementById("name").value || "غير محدد";
-  let phone = document.getElementById("phone").value || "غير محدد";
-  let date = document.getElementById("date").value || "غير محدد";
-
-  // نص الرسالة للبوت
-  let msg = encodeURIComponent(
-    "🍽️ طلب الأكل المغربي\n" +
-    orderDetails +
-    "الاسم: " + name + "\n" +
-    "الهاتف: " + phone + "\n" +
-    "تاريخ التوصيل: " + date + "\n" +
-    "الثمن الإجمالي: " + total.toFixed(2) + " روبل"
-  );
-
-  // تعديل رابط زر الطلب
-  document.getElementById("orderButton").href = "https://t.me/Moroccan_food_bot?start=" + msg;
-});
+}
 </script>
 
 </body>

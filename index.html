@@ -55,13 +55,13 @@
 
 <script>
 const products = [
-  // بالقطعة
+  // المنتجات بالقطعة
   {name: "المسمن العادي", price: 45, unit: "قطعة", icon:"🥞", img:"https://i.imgur.com/KtTFDOE.jpeg"},
   {name: "المسمن المعمر", price: 55, unit: "قطعة", icon:"🥞", img:"https://via.placeholder.com/120"},
   {name: "مملحات", price: 120, unit: "قطعة", icon:"🥐", img:"https://via.placeholder.com/120"},
   {name: "البسطيلة", price: 350, unit: "قطعة", icon:"🥧", img:"https://via.placeholder.com/120"},
 
-  // بالغرام
+  // المنتجات بالغرام
   {name: "سللو", price: 1.5, unit: "غرام", icon:"🍮", img:"https://i.imgur.com/CTEfsGR.jpeg"},
   {name: "بليغات باللوز", price: 1.2, unit: "غرام", icon:"🍪", img:"https://i.imgur.com/vTsVvOd.jpeg"},
   {name: "بريوات بالكفتة", price: 1.1, unit: "غرام", icon:"🥟", img:"https://via.placeholder.com/120"},
@@ -89,7 +89,7 @@ products.forEach((product, index) => {
   menuDiv.appendChild(div);
 });
 
-// حساب الثمن الإجمالي وارسال للبوت
+// حساب الثمن الإجمالي وإرسال الطلبية للبوت
 document.getElementById("calculateBtn").addEventListener("click", function() {
   let total = 0;
   const items = document.querySelectorAll(".item-card input");
@@ -100,7 +100,7 @@ document.getElementById("calculateBtn").addEventListener("click", function() {
     const product = products[input.dataset.index];
     if(qty > 0){
       total += qty * product.price;
-      orderDetails += `${product.name}: ${qty} ${product.unit} - ${qty * product.price} روبل\n`;
+      orderDetails += `${product.name}: ${qty} ${product.unit}\n`;
     }
   });
 
@@ -110,10 +110,12 @@ document.getElementById("calculateBtn").addEventListener("click", function() {
   const phone = document.getElementById("phone").value || "غير محدد";
   const date = document.getElementById("date").value || "غير محدد";
 
+  // ترميز الرسالة بالكامل
   const msg = encodeURIComponent(
     `📦 طلب جديد من الموقع\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n📅 تاريخ التوصل: ${date}\n${orderDetails}💰 الثمن الإجمالي: ${total.toFixed(2)} روبل`
   );
 
+  // الرابط النهائي للبوت
   document.getElementById("orderButton").href = `https://t.me/Moroccanfood_bot?start=${msg}`;
 });
 </script>

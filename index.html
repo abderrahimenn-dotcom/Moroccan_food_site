@@ -55,12 +55,22 @@
 
 <script>
 const products = [
+  // بالقطعة
   {name: "المسمن العادي", price: 45, unit: "قطعة", icon:"🥞", img:"https://i.imgur.com/KtTFDOE.jpeg"},
+  {name: "المسمن المعمر", price: 55, unit: "قطعة", icon:"🥞", img:"https://via.placeholder.com/120"},
+  {name: "مملحات", price: 120, unit: "قطعة", icon:"🥐", img:"https://via.placeholder.com/120"},
+  {name: "البسطيلة", price: 350, unit: "قطعة", icon:"🥧", img:"https://via.placeholder.com/120"},
+
+  // بالغرام
   {name: "سللو", price: 1.5, unit: "غرام", icon:"🍮", img:"https://i.imgur.com/CTEfsGR.jpeg"},
   {name: "بليغات باللوز", price: 1.2, unit: "غرام", icon:"🍪", img:"https://i.imgur.com/vTsVvOd.jpeg"},
-  {name: "حلوة بالتمر", price: 1.15, unit: "غرام", icon:"🍬", img:"https://i.imgur.com/Y7oURBG.jpeg"},
+  {name: "بريوات بالكفتة", price: 1.1, unit: "غرام", icon:"🥟", img:"https://via.placeholder.com/120"},
+  {name: "بريوات بالدجاج", price: 1.0, unit: "غرام", icon:"🍗", img:"https://via.placeholder.com/120"},
+  {name: "بريوات بالحوت", price: 1.2, unit: "غرام", icon:"🐟", img:"https://via.placeholder.com/120"},
+  {name: "حلوة بالتمر", price: 1.15, unit: "غرام", icon:"🍯", img:"https://i.imgur.com/Y7oURBG.jpeg"},
+  {name: "غريبة باللوز", price: 1.2, unit: "غرام", icon:"🍪", img:"https://via.placeholder.com/120"},
   {name: "غريبة بالجوز", price: 1.5, unit: "غرام", icon:"🍪", img:"https://i.imgur.com/NUObOZW.jpeg"},
-  {name: "الفقاص", price: 1.0, unit: "غرام", icon:"🍞", img:"https://i.imgur.com/uw7ZNTf.jpeg"}
+  {name: "الفقاص", price: 1.0, unit: "غرام", icon:"🍩", img:"https://i.imgur.com/uw7ZNTf.jpeg"}
 ];
 
 // إنشاء البطاقات
@@ -73,13 +83,13 @@ products.forEach((product, index) => {
       <img src="${product.img}" alt="${product.name}">
       <div class="item-name">${product.icon} ${product.name}</div>
       <p>${product.price} روبل / ${product.unit}</p>
-      <input type="number" class="form-control" placeholder="الكمية ${product.unit}" data-index="${index}">
+      <input type="number" class="form-control" placeholder="الكمية (${product.unit})" data-index="${index}">
     </div>
   `;
   menuDiv.appendChild(div);
 });
 
-// حساب المجموع وإرسال للبوت
+// حساب الثمن الإجمالي وارسال للبوت
 document.getElementById("calculateBtn").addEventListener("click", function() {
   let total = 0;
   const items = document.querySelectorAll(".item-card input");
@@ -99,11 +109,12 @@ document.getElementById("calculateBtn").addEventListener("click", function() {
   const name = document.getElementById("name").value || "غير محدد";
   const phone = document.getElementById("phone").value || "غير محدد";
   const date = document.getElementById("date").value || "غير محدد";
+
   const msg = encodeURIComponent(
     `📦 طلب جديد من الموقع\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n📅 تاريخ التوصل: ${date}\n${orderDetails}💰 الثمن الإجمالي: ${total.toFixed(2)} روبل`
   );
 
-  document.getElementById("orderButton").href = "https://t.me/Moroccanfood_bot?start=" + msg;
+  document.getElementById("orderButton").href = `https://t.me/Moroccanfood_bot?start=${msg}`;
 });
 </script>
 

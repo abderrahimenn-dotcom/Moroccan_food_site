@@ -6,27 +6,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      background: url('background.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background: #fdf6e3;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      margin:0;
-      padding:0;
     }
-
-    /* الصندوق الشفاف حول المحتوى */
-    .container {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 20px;
-      padding: 30px;
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
-
-    h3 {
-      color:#b91c1c;
-      text-shadow: 1px 1px 2px #fff;
-    }
-
+    h3 { color:#b91c1c; text-shadow: 1px 1px 2px #fff; }
     .item-card { 
       background: linear-gradient(145deg, #ffffff, #f3f3f3);
       border-radius: 15px; 
@@ -36,36 +19,19 @@
       transition: transform 0.2s, box-shadow 0.2s;
       text-align:center;
     }
-
     .item-card:hover { 
       transform: translateY(-5px); 
       box-shadow:0 12px 24px rgba(0,0,0,0.25); 
     }
-
-    .item-card img { 
-      max-width:120px; 
-      border-radius:12px; 
-      margin-bottom:10px; 
-    }
-
-    .item-name { 
-      font-weight: bold; 
-      font-size: 1.1rem; 
-      display:flex; 
-      align-items:center; 
-      justify-content:center; 
-      gap:5px;
-    }
-
+    .item-card img { max-width:120px; border-radius:12px; margin-bottom:10px; }
+    .item-name { font-weight: bold; font-size: 1.1rem; display:flex; align-items:center; justify-content:center; gap:5px;}
     .btn-primary { background-color:#b91c1c; border:none; }
     .btn-success { background-color:#047857; border:none; }
     input[type=number] { max-width:150px; margin:auto; }
     #total { color:#047857; font-weight:bold; font-size:1.2rem; }
   </style>
 </head>
-<body>
-
-<div class="container">
+<body class="container py-4">
 
 <h3 class="text-center mb-4">🍽️ منيو الأكل المغربي</h3>
 
@@ -87,23 +53,21 @@
   <button class="btn btn-success mt-2">اطلب الآن</button>
 </a>
 
-</div> <!-- نهاية container -->
-
 <script>
 const products = [
-  {name: "المسمن العادي", price: 45, unit: "قطعة", icon:"🥞", img: "https://via.placeholder.com/120"},
+  {name: "المسمن العادي", price: 45, unit: "قطعة", icon:"🥞", img: "https://i.imgur.com/KtTFDOE.jpeg"},
   {name: "المسمن المعمر", price: 55, unit: "قطعة", icon:"🥞", img: "https://via.placeholder.com/120"},
   {name: "مملحات", price: 120, unit: "قطعة", icon:"🥐", img: "https://via.placeholder.com/120"},
   {name: "البسطيلة", price: 350, unit: "قطعة", icon:"🥧", img: "https://via.placeholder.com/120"},
-  {name: "سللو", price: 1500, unit: "كلغ", icon:"🍮", img: "https://via.placeholder.com/120"},
-  {name: "بليغات باللوز", price: 1200, unit: "كلغ", icon:"🍬", img: "https://via.placeholder.com/120"},
+  {name: "سللو", price: 1500, unit: "كلغ", icon:"🍮", img: "https://i.imgur.com/CTEfsGR.jpeg"},
+  {name: "بليغات باللوز", price: 1200, unit: "كلغ", icon:"🍬", img: "https://i.imgur.com/vTsVvOd.jpeg"},
   {name: "بريوات بالكفتة", price: 1100, unit: "كلغ", icon:"🥟", img: "https://via.placeholder.com/120"},
   {name: "بريوات بالدجاج", price: 1000, unit: "كلغ", icon:"🍗", img: "https://via.placeholder.com/120"},
   {name: "بريوات بالحوت", price: 1200, unit: "كلغ", icon:"🐟", img: "https://via.placeholder.com/120"},
-  {name: "حلوة بالتمر", price: 1150, unit: "كلغ", icon:"🍯", img: "https://via.placeholder.com/120"},
+  {name: "حلوة بالتمر", price: 1150, unit: "كلغ", icon:"🍯", img: "https://i.imgur.com/Y7oURBG.jpeg"},
   {name: "غريبة باللوز", price: 1200, unit: "كلغ", icon:"🍪", img: "https://via.placeholder.com/120"},
-  {name: "غريبة بالجوز", price: 1500, unit: "كلغ", icon:"🍪", img: "https://via.placeholder.com/120"},
-  {name: "الفقاص", price: 1000, unit: "كلغ", icon:"🍩", img: "https://via.placeholder.com/120"}
+  {name: "غريبة بالجوز", price: 1500, unit: "كلغ", icon:"🍪", img: "https://i.imgur.com/NUObOZW.jpeg"},
+  {name: "الفقاص", price: 1000, unit: "كلغ", icon:"🍩", img: "https://i.imgur.com/uw7ZNTf.jpeg"}
 ];
 
 // إنشاء البطاقات

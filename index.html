@@ -5,12 +5,27 @@
   <title>منيو الأكل المغربي</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
+    /* الخلفية */
     body {
-  background: url('https://i.ibb.co/2Zc5SgK/moroccan-pattern.png') no-repeat center center fixed;
-  background-size: cover;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-    h3 { color:#b91c1c; text-shadow: 1px 1px 2px #fff; }
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* صندوق المحتوى */
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 30px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    h3 { 
+      color:#b91c1c; 
+      text-shadow: 1px 1px 2px #fff; 
+    }
+
     .item-card { 
       background: linear-gradient(145deg, #ffffff, #f3f3f3);
       border-radius: 15px; 
@@ -20,10 +35,12 @@
       transition: transform 0.2s, box-shadow 0.2s;
       text-align:center;
     }
+
     .item-card:hover { 
       transform: translateY(-5px); 
       box-shadow:0 12px 24px rgba(0,0,0,0.25); 
     }
+
     .item-card img { max-width:120px; border-radius:12px; margin-bottom:10px; }
     .item-name { font-weight: bold; font-size: 1.1rem; display:flex; align-items:center; justify-content:center; gap:5px;}
     .btn-primary { background-color:#b91c1c; border:none; }
@@ -32,7 +49,9 @@
     #total { color:#047857; font-weight:bold; font-size:1.2rem; }
   </style>
 </head>
-<body class="container py-4">
+<body>
+
+<div class="container">
 
 <h3 class="text-center mb-4">🍽️ منيو الأكل المغربي</h3>
 
@@ -53,6 +72,8 @@
 <a id="orderButton" href="#" target="_blank">
   <button class="btn btn-success mt-2">اطلب الآن</button>
 </a>
+
+</div>
 
 <script>
 const products = [
@@ -117,4 +138,3 @@ document.getElementById("calculateBtn").addEventListener("click", function() {
 
 </body>
 </html>
-

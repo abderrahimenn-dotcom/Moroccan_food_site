@@ -5,88 +5,66 @@
   <title>منيو الأكل المغربي</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { 
-      background: #fdf6e3; 
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; 
-    }
-    h3 { color:#b91c1c; text-shadow: 1px 1px 2px #fff; }
-    .item-card { 
-      background: linear-gradient(145deg, #ffffff, #f3f3f3);
-      border-radius: 15px; 
-      padding: 20px; 
-      margin-bottom: 20px; 
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-align:center;
-    }
-    .item-card:hover { 
-      transform: translateY(-5px); 
-      box-shadow:0 12px 24px rgba(0,0,0,0.25); 
-    }
-    .item-card img { max-width:120px; border-radius:12px; margin-bottom:10px; }
-    .item-name { font-weight: bold; font-size: 1.1rem; display:flex; align-items:center; justify-content:center; gap:5px;}
-    .btn-primary { background-color:#b91c1c; border:none; }
-    .btn-success { background-color:#047857; border:none; }
-    input[type=number] { max-width:150px; margin:auto; }
-    #total { color:#047857; font-weight:bold; font-size:1.2rem; }
+    body { background:#f8f9fa; }
+    .item-card { background:#fff; border-radius:10px; padding:15px; margin-bottom:15px; }
+    .item-card img { max-width: 100px; margin-bottom:10px; border-radius:8px; }
   </style>
 </head>
 <body class="container py-4">
 
 <h3 class="text-center mb-4">🍽️ منيو الأكل المغربي</h3>
 
-<div id="menu" class="row"></div>
+<!-- ====== المنتجات ====== -->
+<div id="menu"></div>
 
 <hr>
 
+<!-- ====== معلومات الزبون ====== -->
 <h5>📋 معلومات الزبون</h5>
-<div class="row g-2 mb-2">
-  <div class="col-md-4"><input id="name" class="form-control" placeholder="الاسم"></div>
-  <div class="col-md-4"><input id="phone" class="form-control" placeholder="رقم الهاتف"></div>
-  <div class="col-md-4"><input id="date" class="form-control" type="date" placeholder="تاريخ التوصل"></div>
-</div>
+<input id="name" class="form-control mb-2" placeholder="الاسم">
+<input id="phone" class="form-control mb-2" placeholder="رقم الهاتف">
+<input id="date" class="form-control mb-2" type="date" placeholder="تاريخ التوصل">
 
+<!-- ====== الأزرار ====== -->
 <button id="calculateBtn" class="btn btn-primary mt-3">احسب الثمن الإجمالي</button>
-<p id="total" class="mt-2 fw-bold fs-5"></p>
+<p id="total" class="mt-2 fw-bold"></p>
 
 <a id="orderButton" href="#" target="_blank">
   <button class="btn btn-success mt-2">اطلب الآن</button>
 </a>
 
 <script>
+// ====== بيانات المنتجات ======
 const products = [
-  {name: "المسمن العادي", price: 45, unit: "قطعة", img:"KtTFDOE.jpeg"},
-  {name: "المسمن المعمر", price: 55, unit: "قطعة", img:"https://via.placeholder.com/120"},
-  {name: "مملحات", price: 120, unit: "قطعة", img:"https://via.placeholder.com/120"},
-  {name: "البسطيلة", price: 350, unit: "قطعة", img:"https://via.placeholder.com/120"},
-  {name: "سللو", price: 15, unit: "غرام", img:"CTEfsGR.jpeg"},
-  {name: "بليغات باللوز", price: 12, unit: "غرام", img:"vTsVvOd.jpeg"},
-  {name: "بريوات بالكفتة", price: 11, unit: "غرام", img:"https://via.placeholder.com/120"},
-  {name: "بريوات بالدجاج", price: 10, unit: "غرام", img:"https://via.placeholder.com/120"},
-  {name: "بريوات بالحوت", price: 12, unit: "غرام", img:"https://via.placeholder.com/120"},
-  {name: "حلوة بالتمر", price: 11.5, unit: "غرام", img:"Y7oURBG.jpeg"},
-  {name: "غريبة باللوز", price: 12, unit: "غرام", img:"https://via.placeholder.com/120"},
-  {name: "غريبة بالجوز", price: 15, unit: "غرام", img:"NUObOZW.jpeg"},
-  {name: "الفقاص", price: 10, unit: "غرام", img:"uw7ZNTf.jpeg"}
+  {name: "المسمن العادي", price: 45, unit: "قطعة", img: "https://via.placeholder.com/100"},
+  {name: "المسمن المعمر", price: 55, unit: "قطعة", img: "https://via.placeholder.com/100"},
+  {name: "مملحات", price: 120, unit: "قطعة", img: "https://via.placeholder.com/100"},
+  {name: "البسطيلة", price: 350, unit: "قطعة", img: "https://via.placeholder.com/100"},
+  {name: "سللو", price: 1500, unit: "كلغ", img: "https://via.placeholder.com/100"},
+  {name: "بليغات باللوز", price: 1200, unit: "كلغ", img: "https://via.placeholder.com/100"},
+  {name: "بريوات بالكفتة", price: 1100, unit: "كلغ", img: "https://via.placeholder.com/100"},
+  {name: "بريوات بالدجاج", price: 1000, unit: "كلغ", img: "https://via.placeholder.com/100"},
+  {name: "بريوات بالحوت", price: 1200, unit: "كلغ", img: "https://via.placeholder.com/100"},
+  {name: "حلوة بالتمر", price: 1150, unit: "كلغ", img: "https://via.placeholder.com/100"},
+  {name: "غريبة باللوز", price: 1200, unit: "كلغ", img: "https://via.placeholder.com/100"},
+  {name: "غريبة بالجوز", price: 1500, unit: "كلغ", img: "https://via.placeholder.com/100"},
+  {name: "الفقاص", price: 1000, unit: "كلغ", img: "https://via.placeholder.com/100"}
 ];
 
-// إنشاء البطاقات
+// ====== إنشاء البطاقات ======
 const menuDiv = document.getElementById("menu");
 products.forEach((product, index) => {
   const div = document.createElement("div");
-  div.className = "col-md-4";
+  div.className = "item-card";
   div.innerHTML = `
-    <div class="item-card">
-      <img src="${product.img}" alt="${product.name}">
-      <div class="item-name">${product.name}</div>
-      <p>${product.price} روبل / ${product.unit}</p>
-      <input type="number" class="form-control" placeholder="الكمية ${product.unit}" data-index="${index}">
-    </div>
+    <img src="${product.img}" alt="${product.name}">
+    <strong>${product.name}</strong> (${product.price} روبل / ${product.unit})
+    <input type="number" class="form-control mt-2" placeholder="الكمية ${product.unit}" data-index="${index}">
   `;
   menuDiv.appendChild(div);
 });
 
-// حساب المجموع وإرسال للبوت
+// ====== حساب المجموع ======
 document.getElementById("calculateBtn").addEventListener("click", function() {
   let total = 0;
   const items = document.querySelectorAll(".item-card input");
@@ -103,14 +81,14 @@ document.getElementById("calculateBtn").addEventListener("click", function() {
 
   document.getElementById("total").innerText = "الثمن الإجمالي: " + total.toFixed(2) + " روبل";
 
+  // إعداد الرابط للبوت
   const name = document.getElementById("name").value || "غير محدد";
   const phone = document.getElementById("phone").value || "غير محدد";
   const date = document.getElementById("date").value || "غير محدد";
-
-  // الرابط المباشر للبوت مع رسالة الطلبية
   const msg = encodeURIComponent(
     `طلب الأكل المغربي\nالاسم: ${name}\nالهاتف: ${phone}\nتاريخ التوصل: ${date}\n${orderDetails}الثمن الإجمالي: ${total.toFixed(2)} روبل`
   );
+
   document.getElementById("orderButton").href = "https://t.me/Moroccanfood_bot?start=" + msg;
 });
 </script>

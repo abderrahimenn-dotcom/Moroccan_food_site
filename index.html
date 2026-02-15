@@ -55,19 +55,19 @@
 
 <script>
 const products = [
-  {name: "المسمن العادي", price: 0.045, unit: "غرام", icon:"🥞", img:"https://i.imgur.com/KtTFDOE.jpeg"},
-  {name: "المسمن المعمر", price: 0.055, unit: "غرام", icon:"🥞", img:"https://via.placeholder.com/120"},
-  {name: "مملحات", price: 0.12, unit: "غرام", icon:"🥐", img:"https://via.placeholder.com/120"},
-  {name: "البسطيلة", price: 0.35, unit: "غرام", icon:"🥧", img:"https://via.placeholder.com/120"},
-  {name: "سللو", price: 1.5, unit: "غرام", icon:"🍮", img:"https://i.imgur.com/CTEfsGR.jpeg"},
-  {name: "بليغات باللوز", price: 1.2, unit: "غرام", icon:"🍬", img:"https://i.imgur.com/vTsVvOd.jpeg"},
-  {name: "بريوات بالكفتة", price: 1.1, unit: "غرام", icon:"🥟", img:"https://via.placeholder.com/120"},
-  {name: "بريوات بالدجاج", price: 1.0, unit: "غرام", icon:"🍗", img:"https://via.placeholder.com/120"},
-  {name: "بريوات بالحوت", price: 0.12, unit: "غرام", icon:"🐟", img:"https://via.placeholder.com/120"},
-  {name: "حلوة بالتمر", price: 1.15, unit: "غرام", icon:"🍯", img:"https://i.imgur.com/Y7oURBG.jpeg"},
-  {name: "غريبة باللوز", price: 1.2, unit: "غرام", icon:"🍪", img:"https://via.placeholder.com/120"},
-  {name: "غريبة بالجوز", price: 1.5, unit: "غرام", icon:"🍪", img:"https://i.imgur.com/NUObOZW.jpeg"},
-  {name: "الفقاص", price: 1.0, unit: "غرام", icon:"🍩", img:"https://i.imgur.com/uw7ZNTf.jpeg"}
+  {name: "المسمن العادي", price: 45, unit: "قطعة", img:"KtTFDOE.jpeg"},
+  {name: "المسمن المعمر", price: 55, unit: "قطعة", img:"https://via.placeholder.com/120"},
+  {name: "مملحات", price: 120, unit: "قطعة", img:"https://via.placeholder.com/120"},
+  {name: "البسطيلة", price: 350, unit: "قطعة", img:"https://via.placeholder.com/120"},
+  {name: "سللو", price: 15, unit: "غرام", img:"CTEfsGR.jpeg"},
+  {name: "بليغات باللوز", price: 12, unit: "غرام", img:"vTsVvOd.jpeg"},
+  {name: "بريوات بالكفتة", price: 11, unit: "غرام", img:"https://via.placeholder.com/120"},
+  {name: "بريوات بالدجاج", price: 10, unit: "غرام", img:"https://via.placeholder.com/120"},
+  {name: "بريوات بالحوت", price: 12, unit: "غرام", img:"https://via.placeholder.com/120"},
+  {name: "حلوة بالتمر", price: 11.5, unit: "غرام", img:"Y7oURBG.jpeg"},
+  {name: "غريبة باللوز", price: 12, unit: "غرام", img:"https://via.placeholder.com/120"},
+  {name: "غريبة بالجوز", price: 15, unit: "غرام", img:"NUObOZW.jpeg"},
+  {name: "الفقاص", price: 10, unit: "غرام", img:"uw7ZNTf.jpeg"}
 ];
 
 // إنشاء البطاقات
@@ -78,9 +78,9 @@ products.forEach((product, index) => {
   div.innerHTML = `
     <div class="item-card">
       <img src="${product.img}" alt="${product.name}">
-      <div class="item-name">${product.icon} ${product.name}</div>
-      <p>${(product.price*1000).toFixed(2)} روبل / 1 كغ</p>
-      <input type="number" class="form-control" placeholder="الكمية بالغرام" data-index="${index}">
+      <div class="item-name">${product.name}</div>
+      <p>${product.price} روبل / ${product.unit}</p>
+      <input type="number" class="form-control" placeholder="الكمية ${product.unit}" data-index="${index}">
     </div>
   `;
   menuDiv.appendChild(div);
@@ -97,7 +97,7 @@ document.getElementById("calculateBtn").addEventListener("click", function() {
     const product = products[input.dataset.index];
     if(qty > 0){
       total += qty * product.price;
-      orderDetails += `${product.name}: ${qty} غرام - ${(qty * product.price).toFixed(2)} روبل\n`;
+      orderDetails += `${product.name}: ${qty} ${product.unit} - ${qty * product.price} روبل\n`;
     }
   });
 
@@ -107,12 +107,11 @@ document.getElementById("calculateBtn").addEventListener("click", function() {
   const phone = document.getElementById("phone").value || "غير محدد";
   const date = document.getElementById("date").value || "غير محدد";
 
+  // الرابط المباشر للبوت مع رسالة الطلبية
   const msg = encodeURIComponent(
     `طلب الأكل المغربي\nالاسم: ${name}\nالهاتف: ${phone}\nتاريخ التوصل: ${date}\n${orderDetails}الثمن الإجمالي: ${total.toFixed(2)} روبل`
   );
-
-  // إرسال الطلب مباشرة للبوت
-  document.getElementById("orderButton").href = "https://t.me/Moroccanfood_bot?text=" + msg;
+  document.getElementById("orderButton").href = "https://t.me/Moroccanfood_bot?start=" + msg;
 });
 </script>
 
